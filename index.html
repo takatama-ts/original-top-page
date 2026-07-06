@@ -376,10 +376,9 @@
     document.getElementById('modal-overlay').classList.add('open');
     document.getElementById('modal-close-btn').focus();
     clearModalTimers();
-    typeInEl(headingEl, headingText, 30, function() {
-      var desc = item.description || '';
-      if (desc) typeInEl(descEl, desc, 7, null);
-    });
+    typeInEl(headingEl, headingText, 30, null);
+    var desc = item.description || '';
+    if (desc) typeInEl(descEl, desc, 7, null);
   }
 
   function closeModal() {
