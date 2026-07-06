@@ -49,6 +49,7 @@
   /* ── Main panel ── */
   .name-frame {
     position: relative;
+    cursor: pointer;
     padding: 36px clamp(36px, 7vw, 84px) 28px;
     text-align: center;
     min-width: min(460px, 90vw);
@@ -242,7 +243,7 @@
   <div class="name-frame" role="heading" aria-level="1" aria-label="User identity">
     <div class="c-tl"></div><div class="c-tr"></div>
     <div class="c-bl"></div><div class="c-br"></div>
-    <div class="sys-label">◈ USER IDENTITY</div>
+    <div class="sys-label">◈ USER ELEMENT</div>
     <div id="name-wrap">
       <span id="name-text" aria-live="polite" aria-atomic="true"></span>
       <span id="cursor" aria-hidden="true"></span>
@@ -260,7 +261,7 @@
     <div class="mc-tl"></div><div class="mc-tr"></div>
     <div class="mc-bl"></div><div class="mc-br"></div>
     <button class="modal-close" id="modal-close-btn" aria-label="閉じる">✕</button>
-    <div class="modal-eyebrow">◈ INTEREST</div>
+    <div class="modal-eyebrow">◈ ELEMENT</div>
     <h2 class="modal-heading" id="modal-heading"></h2>
     <p class="modal-desc" id="modal-desc"></p>
     <div class="modal-actions">
@@ -366,6 +367,10 @@
   document.getElementById('modal-close-btn').addEventListener('click', closeModal);
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeModal();
+  });
+
+  document.querySelector('.name-frame').addEventListener('click', function() {
+    if (IDENTITIES.length) openModal(IDENTITIES[nameIdx]);
   });
 
   // ── Links renderer
