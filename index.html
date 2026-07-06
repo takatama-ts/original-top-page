@@ -265,7 +265,7 @@
     <div class="mc-tl"></div><div class="mc-tr"></div>
     <div class="mc-bl"></div><div class="mc-br"></div>
     <button class="modal-close" id="modal-close-btn" aria-label="閉じる">✕</button>
-    <div class="modal-eyebrow">◈ ELEMENT</div>
+    <div class="modal-eyebrow" id="modal-eyebrow">◈ ELEMENT</div>
     <h2 class="modal-heading" id="modal-heading"></h2>
     <p class="modal-desc" id="modal-desc"></p>
     <div class="modal-actions">
@@ -360,6 +360,7 @@
     var panel = document.getElementById('modal-panel');
     var headingEl = document.getElementById('modal-heading');
     var descEl    = document.getElementById('modal-desc');
+    document.getElementById('modal-eyebrow').textContent = '◈ ELEMENT : ' + item.label;
     var headingText = item.heading || item.label;
     headingEl.dataset.len = headingText.length > 22 ? 'long' : headingText.length > 14 ? 'med' : '';
     descEl.textContent = '';
