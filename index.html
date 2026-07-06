@@ -187,9 +187,13 @@
   .modal-heading {
     font-size: 1.25rem; font-weight: 700; letter-spacing: 0.03em;
     color: var(--text); margin-bottom: 14px; text-wrap: balance;
+    word-break: auto-phrase;
   }
+  .modal-heading[data-len="med"]  { font-size: 1.05rem; }
+  .modal-heading[data-len="long"] { font-size: 0.88rem; }
   .modal-desc {
     font-size: 0.8rem; line-height: 1.95; color: var(--label); margin-bottom: 28px;
+    white-space: pre-line;
   }
   .modal-actions { display: flex; }
   .modal-search-btn {
@@ -341,7 +345,10 @@
   // ── Modal
   function openModal(item) {
     var panel = document.getElementById('modal-panel');
-    document.getElementById('modal-heading').textContent = item.heading || item.label;
+    var headingEl = document.getElementById('modal-heading');
+    var headingText = item.heading || item.label;
+    headingEl.textContent = headingText;
+    headingEl.dataset.len = headingText.length > 22 ? 'long' : headingText.length > 14 ? 'med' : '';
     document.getElementById('modal-desc').textContent    = item.description || '';
     var sw = item['search-word'];
     var actionsEl = document.querySelector('.modal-actions');
