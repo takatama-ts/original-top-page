@@ -378,7 +378,7 @@
     clearModalTimers();
     typeInEl(headingEl, headingText, 30, null);
     var desc = item.description || '';
-    if (desc) typeInEl(descEl, desc, 7, null);
+    if (desc) typeInEl(descEl, desc, Math.max(7, Math.floor(500 / desc.length)), null);
   }
 
   function closeModal() {
