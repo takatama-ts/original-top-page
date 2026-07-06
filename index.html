@@ -343,13 +343,26 @@
   }
 
   // ── Modal
+  var _modalTimers = [];
+  function clearModalTimers() { _modalTimers.forEach(clearTimeout); _modalTimers = []; }
+
+  function typeInEl(el, str, ms, done) {
+    el.textContent = ''; var i = 0;
+    function step() {
+      el.textContent = str.slice(0, ++i);
+      if (i < str.length) _modalTimers.push(setTimeout(step, ms + Math.random() * ms * 0.5));
+      else if (done)       _modalTimers.push(setTimeout(done, 80));
+    }
+    step();
+  }
+
   function openModal(item) {
     var panel = document.getElementById('modal-panel');
     var headingEl = document.getElementById('modal-heading');
+    var descEl    = document.getElementById('modal-desc');
     var headingText = item.heading || item.label;
-    headingEl.textContent = headingText;
     headingEl.dataset.len = headingText.length > 22 ? 'long' : headingText.length > 14 ? 'med' : '';
-    document.getElementById('modal-desc').textContent    = item.description || '';
+    descEl.textContent = '';
     var sw = item['search-word'];
     var actionsEl = document.querySelector('.modal-actions');
     if (sw) {
@@ -362,9 +375,15 @@
     panel.style.setProperty('--mc', item.color);
     document.getElementById('modal-overlay').classList.add('open');
     document.getElementById('modal-close-btn').focus();
+    clearModalTimers();
+    typeInEl(headingEl, headingText, 62, function() {
+      var desc = item.description || '';
+      if (desc) typeInEl(descEl, desc, 14, null);
+    });
   }
 
   function closeModal() {
+    clearModalTimers();
     document.getElementById('modal-overlay').classList.remove('open');
   }
 
