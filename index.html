@@ -194,13 +194,18 @@
   .modal-search-btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 9px 22px;
-    background: var(--mc, var(--accent)); color: #fff;
+    background: transparent;
+    color: var(--mc, var(--accent));
+    border: 1px solid var(--mc, var(--accent));
     text-decoration: none;
     font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
-    transition: opacity 0.2s;
+    transition: background 0.2s, color 0.2s;
   }
-  .modal-search-btn:hover { opacity: 0.82; }
-  .modal-search-btn:focus-visible { outline: 2px solid #fff; outline-offset: -3px; }
+  .modal-search-btn:hover {
+    background: var(--mc, var(--accent));
+    color: #fff;
+  }
+  .modal-search-btn:focus-visible { outline: 2px solid var(--mc, var(--accent)); outline-offset: 2px; }
   .modal-search-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
   .modal-close {
     position: absolute; top: 12px; right: 14px;
@@ -337,9 +342,15 @@
     var panel = document.getElementById('modal-panel');
     document.getElementById('modal-heading').textContent = item.heading || item.label;
     document.getElementById('modal-desc').textContent    = item.description || '';
-    var sw = item['search-word'] || item.label;
-    document.getElementById('modal-search-btn').href =
-      'https://www.google.com/search?q=' + encodeURIComponent(sw);
+    var sw = item['search-word'];
+    var actionsEl = document.querySelector('.modal-actions');
+    if (sw) {
+      document.getElementById('modal-search-btn').href =
+        'https://www.google.com/search?q=' + encodeURIComponent(sw);
+      actionsEl.style.display = '';
+    } else {
+      actionsEl.style.display = 'none';
+    }
     panel.style.setProperty('--mc', item.color);
     document.getElementById('modal-overlay').classList.add('open');
     document.getElementById('modal-close-btn').focus();
