@@ -144,6 +144,73 @@
   .tag:hover { opacity: 1; box-shadow: 0 3px 12px rgba(0,0,0,0.09); }
   @keyframes floatTag { from{transform:translateY(0)} to{transform:translateY(-4px)} }
 
+  /* ── Modal ── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(8, 23, 46, 0.45);
+    backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal-panel {
+    position: relative;
+    background: rgba(255, 255, 255, 0.97);
+    border: 1px solid var(--pborder);
+    backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 12px 48px rgba(14, 52, 110, 0.18), inset 0 1px 0 #fff;
+    padding: 40px 44px 36px;
+    max-width: 460px; width: 100%;
+  }
+  .modal-panel::before {
+    content: ''; position: absolute;
+    top: 0; left: 20px; right: 20px; height: 2px;
+    background: var(--mc, var(--accent)); opacity: 0.55;
+  }
+  .mc-tl,.mc-tr,.mc-bl,.mc-br {
+    position: absolute; width: 16px; height: 16px;
+    border-color: var(--mc, var(--accent)); border-style: solid;
+  }
+  .mc-tl { top:0; left:0;   border-width: 2px 0 0 2px; }
+  .mc-tr { top:0; right:0;  border-width: 2px 2px 0 0; }
+  .mc-bl { bottom:0; left:0;  border-width: 0 0 2px 2px; }
+  .mc-br { bottom:0; right:0; border-width: 0 2px 2px 0; }
+
+  .modal-eyebrow {
+    font-size: 0.58rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--mc, var(--accent)); opacity: 0.75; margin-bottom: 12px;
+  }
+  .modal-heading {
+    font-size: 1.25rem; font-weight: 700; letter-spacing: 0.03em;
+    color: var(--text); margin-bottom: 14px; text-wrap: balance;
+  }
+  .modal-desc {
+    font-size: 0.8rem; line-height: 1.95; color: var(--label); margin-bottom: 28px;
+  }
+  .modal-actions { display: flex; }
+  .modal-search-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 22px;
+    background: var(--mc, var(--accent)); color: #fff;
+    text-decoration: none;
+    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+    transition: opacity 0.2s;
+  }
+  .modal-search-btn:hover { opacity: 0.82; }
+  .modal-search-btn:focus-visible { outline: 2px solid #fff; outline-offset: -3px; }
+  .modal-search-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+  .modal-close {
+    position: absolute; top: 12px; right: 14px;
+    background: none; border: none; cursor: pointer;
+    font-size: 0.75rem; color: var(--dim); padding: 6px; line-height: 1;
+    transition: color 0.2s;
+  }
+  .modal-close:hover { color: var(--text); }
+  .modal-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
   /* ── Footer ── */
   .footer {
     position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
@@ -181,6 +248,26 @@
   <nav class="links" aria-label="Profile links"></nav>
 
   <div class="interests" role="list" aria-label="Interests"></div>
+</div>
+
+<div id="modal-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+  <div class="modal-panel" id="modal-panel">
+    <div class="mc-tl"></div><div class="mc-tr"></div>
+    <div class="mc-bl"></div><div class="mc-br"></div>
+    <button class="modal-close" id="modal-close-btn" aria-label="閉じる">✕</button>
+    <div class="modal-eyebrow">◈ INTEREST</div>
+    <h2 class="modal-heading" id="modal-heading"></h2>
+    <p class="modal-desc" id="modal-desc"></p>
+    <div class="modal-actions">
+      <a class="modal-search-btn" id="modal-search-btn" href="#" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="m21 21-4.35-4.35" stroke-linecap="round"/>
+        </svg>
+        ブラウザで検索
+      </a>
+    </div>
+  </div>
 </div>
 
 <div class="footer">SYSTEM ONLINE ──── ACCESS GRANTED</div>
@@ -237,9 +324,38 @@
       tag.style.setProperty('--dl', (i * 0.28) + 's');
       tag.style.borderColor = item.color + '60';
       tag.style.color = item.color;
+      tag.style.cursor = 'pointer';
+      tag.addEventListener('click', (function(i) {
+        return function() { openModal(i); };
+      })(item));
       el.appendChild(tag);
     });
   }
+
+  // ── Modal
+  function openModal(item) {
+    var panel = document.getElementById('modal-panel');
+    document.getElementById('modal-heading').textContent = item.heading || item.label;
+    document.getElementById('modal-desc').textContent    = item.description || '';
+    var sw = item['search-word'] || item.label;
+    document.getElementById('modal-search-btn').href =
+      'https://www.google.com/search?q=' + encodeURIComponent(sw);
+    panel.style.setProperty('--mc', item.color);
+    document.getElementById('modal-overlay').classList.add('open');
+    document.getElementById('modal-close-btn').focus();
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+  }
+
+  document.getElementById('modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
 
   // ── Links renderer
   function initLinks(links) {
