@@ -127,7 +127,7 @@
   .lbtn svg { width: 14px; height: 14px; flex-shrink: 0; }
 
   /* ── Interest tags ── */
-  .interests {
+  .identities {
     display: flex; gap: 8px; flex-wrap: wrap;
     justify-content: center; max-width: 520px;
   }
@@ -247,7 +247,7 @@
 
   <nav class="links" aria-label="Profile links"></nav>
 
-  <div class="interests" role="list" aria-label="Interests"></div>
+  <div class="identities" role="list" aria-label="Identities"></div>
 </div>
 
 <div id="modal-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
@@ -312,10 +312,10 @@
   setInterval(tickClock, 1000);
   tickClock();
 
-  // ── Interests renderer
-  function initInterests(interests) {
-    var el = document.querySelector('.interests');
-    interests.forEach(function(item, i) {
+  // ── Identities renderer
+  function initIdentities(identities) {
+    var el = document.querySelector('.identities');
+    identities.forEach(function(item, i) {
       var tag = document.createElement('div');
       tag.className = 'tag';
       tag.setAttribute('role', 'listitem');
@@ -387,20 +387,22 @@
     });
   }
 
-  // ── Name animation
-  var nameEl   = document.getElementById('name-text');
-  var cursorEl = document.getElementById('cursor');
-  var NAMES    = [];
-  var nameIdx  = 0;
+  // ── Identity animation
+  var nameEl     = document.getElementById('name-text');
+  var cursorEl   = document.getElementById('cursor');
+  var IDENTITIES = [];
+  var nameIdx    = 0;
 
   function applyGradient(idx) {
-    var g = NAME_GRADIENTS[idx % NAME_GRADIENTS.length];
-    nameEl.style.background = 'linear-gradient(135deg,' + g[0] + ',' + g[1] + ')';
+    var item = IDENTITIES[idx];
+    var c1   = (item && item.color) ? item.color : '#1258c8';
+    var c2   = NAME_GRADIENTS[idx % NAME_GRADIENTS.length][1];
+    nameEl.style.background = 'linear-gradient(135deg,' + c1 + ',' + c2 + ')';
     nameEl.style.webkitBackgroundClip = 'text';
     nameEl.style.backgroundClip = 'text';
     nameEl.style.webkitTextFillColor = 'transparent';
     nameEl.style.color = 'transparent';
-    cursorEl.style.background = 'linear-gradient(180deg,' + g[0] + ',' + g[1] + ')';
+    cursorEl.style.background = 'linear-gradient(180deg,' + c1 + ',' + c2 + ')';
   }
 
   function isJapanese(str) { return /[぀-ヿ一-鿿]/.test(str); }
@@ -435,13 +437,14 @@
   }
 
   function pickNext() {
-    var n; do { n = Math.floor(Math.random() * NAMES.length); } while (n === nameIdx); return n;
+    var n; do { n = Math.floor(Math.random() * IDENTITIES.length); } while (n === nameIdx); return n;
   }
 
   function cycle() {
+    var label = IDENTITIES[nameIdx].label;
     applyGradient(nameIdx);
-    typeIn(NAMES[nameIdx], function() {
-      glitchOut(NAMES[nameIdx], function() {
+    typeIn(label, function() {
+      glitchOut(label, function() {
         nameIdx = pickNext(); setTimeout(cycle, 160);
       });
     });
@@ -460,11 +463,11 @@
     fetch('./links.jsonl').then(function(r) { return r.text(); }).then(parseJsonl)
   ]).then(function(results) {
     var profile = results[0], links = results[1];
-    NAMES = profile.names || [];
-    initInterests(profile.interests || []);
+    IDENTITIES = profile.identities || [];
+    initIdentities(IDENTITIES);
     initLinks(links);
-    if (NAMES.length) {
-      nameIdx = Math.floor(Math.random() * NAMES.length);
+    if (IDENTITIES.length) {
+      nameIdx = Math.floor(Math.random() * IDENTITIES.length);
       cycle();
     }
   }).catch(function(err) {

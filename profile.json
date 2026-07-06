@@ -1,10 +1,26 @@
 {
-  "names": [
-    "Tama / たま",
-    "Erlei",
-    "Kohki_Takatama"
-  ],
-  "interests": [
+  "identities": [
+    {
+      "label": "Tama / たま",
+      "color": "#1258c8",
+      "heading": "Tama / たま",
+      "description": "主に使うハンドルネーム。",
+      "search-word": "Tama たま"
+    },
+    {
+      "label": "Erlei",
+      "color": "#8b2de8",
+      "heading": "Erlei",
+      "description": "もう一つの名前。",
+      "search-word": "Erlei"
+    },
+    {
+      "label": "Kohki_Takatama",
+      "color": "#077a48",
+      "heading": "Kohki_Takatama",
+      "description": "本名ベースのアカウント名。",
+      "search-word": "Kohki Takatama"
+    },
     {
       "label": "からくりサーカス",
       "color": "#c8003e",
