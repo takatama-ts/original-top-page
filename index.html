@@ -60,7 +60,6 @@
       0 6px 32px rgba(14, 52, 110, 0.10),
       0 1px 4px rgba(14, 52, 110, 0.07),
       inset 0 1px 0 rgba(255, 255, 255, 1);
-    overflow: hidden;
   }
 
   /* SAO corner brackets */
@@ -73,7 +72,6 @@
   .c-bl { bottom: 0; left: 0;  border-width: 0 0 2px 2px; }
   .c-br { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
 
-  /* Extended tick lines from each corner */
   .c-tl::after { content:''; position:absolute; top:-2px; left:20px;  width:28px; height:2px; background:var(--accent); opacity:0.3; }
   .c-tr::after { content:''; position:absolute; top:-2px; right:20px; width:28px; height:2px; background:var(--accent); opacity:0.3; }
   .c-bl::after { content:''; position:absolute; bottom:-2px; left:20px;  width:28px; height:2px; background:var(--accent); opacity:0.3; }
@@ -103,7 +101,6 @@
   }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-  /* divider row below name */
   .frame-status {
     margin-top: 14px;
     display: flex; align-items: center; gap: 10px;
@@ -120,7 +117,7 @@
     padding: 9px 20px;
     text-decoration: none; color: var(--text);
     font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
-    border: 1px solid;
+    border: 1px solid rgba(18,88,200,0.4);
     background: rgba(255,255,255,0.82);
     backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
     box-shadow: 0 2px 8px rgba(14,52,110,0.07);
@@ -128,18 +125,6 @@
   }
   .lbtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   .lbtn svg { width: 14px; height: 14px; flex-shrink: 0; }
-
-  .lbtn-gh  { border-color: rgba(10,150,72,0.40); }
-  .lbtn-gh  svg { color: #0a9648; }
-  .lbtn-gh:hover  { background: rgba(10,150,72,0.06); box-shadow: 0 4px 18px rgba(10,150,72,0.18); }
-
-  .lbtn-qi  { border-color: rgba(0,120,175,0.40); }
-  .lbtn-qi  svg { color: #0078af; }
-  .lbtn-qi:hover  { background: rgba(0,120,175,0.06); box-shadow: 0 4px 18px rgba(0,120,175,0.18); }
-
-  .lbtn-pt  { border-color: rgba(185,0,90,0.40); }
-  .lbtn-pt  svg { color: #b9005a; }
-  .lbtn-pt:hover  { background: rgba(185,0,90,0.06); box-shadow: 0 4px 18px rgba(185,0,90,0.18); }
 
   /* ── Interest tags ── */
   .interests {
@@ -177,7 +162,6 @@
 <canvas id="bg"></canvas>
 
 <div class="hud">
-
   <div class="clock" aria-live="polite" aria-atomic="true">
     <div id="clock-time">00:00:00</div>
     <div id="clock-date">----.--.--</div>
@@ -194,43 +178,9 @@
     <div class="frame-status"><span></span>ACCESS GRANTED<span></span></div>
   </div>
 
-  <nav class="links" aria-label="Profile links">
-    <a class="lbtn lbtn-gh" href="https://github.com/kohki-takatama" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.49
-                 .5.09.682-.218.682-.482 0-.237-.009-.868-.014-1.703
-                 -2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462
-                 -.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032
-                 .892 1.53 2.341 1.088 2.91.832.091-.647.35-1.088.636-1.338
-                 -2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683
-                 -.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025
-                 A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337
-                 c1.909-1.294 2.748-1.025 2.748-1.025.546 1.377.202 2.394.1 2.647
-                 .64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935
-                 .359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743
-                 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12
-                 c0-5.523-4.477-10-10-10z"/>
-      </svg>
-      GitHub
-    </a>
-    <a class="lbtn lbtn-qi" href="https://qiita.com/kohki_takatama" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <circle cx="12" cy="12" r="9"/>
-        <path d="M12 8v4l2.5 2.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      Qiita
-    </a>
-    <a class="lbtn lbtn-pt" href="https://potofu.me/kohki-takatama" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <circle cx="12" cy="8" r="4"/>
-        <path d="M4 20c0-4 3.582-7 8-7s8 3 8 7" stroke-linecap="round"/>
-      </svg>
-      Potofu
-    </a>
-  </nav>
+  <nav class="links" aria-label="Profile links"></nav>
 
   <div class="interests" role="list" aria-label="Interests"></div>
-
 </div>
 
 <div class="footer">SYSTEM ONLINE ──── ACCESS GRANTED</div>
@@ -239,8 +189,7 @@
 (function () {
   'use strict';
 
-  var NAMES = ['Tama','Erlei','たま','Kohki_Takatama','かめれおん','MaoWeiyu','雲雀'];
-
+  // ── Style maps (UI concern — edit index.html to change appearance)
   var NAME_GRADIENTS = [
     ['#1258c8','#00b4d8'],
     ['#8b2de8','#e82d78'],
@@ -251,53 +200,91 @@
     ['#e87800','#0ea86a'],
   ];
 
-  var INTERESTS = [
-    { label: 'からくりサーカス', color: '#c8003e' },
-    { label: '最終兵器彼女',     color: '#6010c0' },
-    { label: '3つの物語',        color: '#0078af' },
-    { label: 'プログラミング',   color: '#077a48' },
-    { label: '読書',             color: '#b07000' },
-    { label: '自然',             color: '#2e7a1a' },
-  ];
+  var LINK_STYLES = {
+    github: { border:'rgba(10,150,72,0.40)',  icon:'#0a9648', hoverBg:'rgba(10,150,72,0.06)',  hoverSh:'rgba(10,150,72,0.18)'  },
+    qiita:  { border:'rgba(0,120,175,0.40)',  icon:'#0078af', hoverBg:'rgba(0,120,175,0.06)',  hoverSh:'rgba(0,120,175,0.18)'  },
+    potofu: { border:'rgba(185,0,90,0.40)',   icon:'#b9005a', hoverBg:'rgba(185,0,90,0.06)',   hoverSh:'rgba(185,0,90,0.18)'   },
+  };
+
+  var LINK_ICONS = {
+    github: '<path fill="currentColor" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.49.5.09.682-.218.682-.482 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.091-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.748-1.025 2.748-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>',
+    qiita:  '<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 8v4l2.5 2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+    potofu: '<circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 3.582-7 8-7s8 3 8 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+  };
 
   var ACCENTS = ['#1258c8','#0099cc','#8b2de8','#d42060','#d46000','#0a9648'];
 
-  // ── Clock
+  // ── Clock (starts immediately)
   var clockTime = document.getElementById('clock-time');
-  var clockDate = document.getElementById('clock-date');
+  var clockDate  = document.getElementById('clock-date');
   function tickClock() {
     var n = new Date(), p = function(v){ return String(v).padStart(2,'0'); };
     clockTime.textContent = p(n.getHours())+':'+p(n.getMinutes())+':'+p(n.getSeconds());
-    clockDate.textContent = n.getFullYear()+'.'+p(n.getMonth()+1)+'.'+p(n.getDate());
+    clockDate.textContent  = n.getFullYear()+'.'+p(n.getMonth()+1)+'.'+p(n.getDate());
   }
-  setInterval(tickClock, 1000); tickClock();
+  setInterval(tickClock, 1000);
+  tickClock();
 
-  // ── Interest tags
-  var tagsEl = document.querySelector('.interests');
-  INTERESTS.forEach(function(item, i) {
-    var el = document.createElement('div');
-    el.className = 'tag'; el.setAttribute('role','listitem');
-    el.textContent = item.label;
-    el.style.setProperty('--d', (3.8 + i * 0.45)+'s');
-    el.style.setProperty('--dl', (i * 0.28)+'s');
-    el.style.borderColor = item.color+'60';
-    el.style.color = item.color;
-    tagsEl.appendChild(el);
-  });
+  // ── Interests renderer
+  function initInterests(interests) {
+    var el = document.querySelector('.interests');
+    interests.forEach(function(item, i) {
+      var tag = document.createElement('div');
+      tag.className = 'tag';
+      tag.setAttribute('role', 'listitem');
+      tag.textContent = item.label;
+      tag.style.setProperty('--d',  (3.8 + i * 0.45) + 's');
+      tag.style.setProperty('--dl', (i * 0.28) + 's');
+      tag.style.borderColor = item.color + '60';
+      tag.style.color = item.color;
+      el.appendChild(tag);
+    });
+  }
+
+  // ── Links renderer
+  function initLinks(links) {
+    var nav = document.querySelector('.links');
+    links.forEach(function(link) {
+      var s = LINK_STYLES[link.type] || {
+        border: 'rgba(18,88,200,0.4)', icon: '#1258c8',
+        hoverBg: 'rgba(18,88,200,0.06)', hoverSh: 'rgba(18,88,200,0.18)'
+      };
+      var icon = LINK_ICONS[link.type] || '';
+      var a = document.createElement('a');
+      a.className = 'lbtn';
+      a.href = link.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.style.borderColor = s.border;
+      a.innerHTML =
+        '<svg viewBox="0 0 24 24" aria-hidden="true" style="width:14px;height:14px;flex-shrink:0;color:' + s.icon + '">' +
+        icon + '</svg>' + link.label;
+      a.addEventListener('mouseenter', function() {
+        a.style.background  = s.hoverBg;
+        a.style.boxShadow   = '0 4px 18px ' + s.hoverSh;
+      });
+      a.addEventListener('mouseleave', function() {
+        a.style.background  = 'rgba(255,255,255,0.82)';
+        a.style.boxShadow   = '0 2px 8px rgba(14,52,110,0.07)';
+      });
+      nav.appendChild(a);
+    });
+  }
 
   // ── Name animation
   var nameEl   = document.getElementById('name-text');
   var cursorEl = document.getElementById('cursor');
-  var nameIdx  = Math.floor(Math.random() * NAMES.length);
+  var NAMES    = [];
+  var nameIdx  = 0;
 
   function applyGradient(idx) {
     var g = NAME_GRADIENTS[idx % NAME_GRADIENTS.length];
-    nameEl.style.background = 'linear-gradient(135deg,'+g[0]+','+g[1]+')';
+    nameEl.style.background = 'linear-gradient(135deg,' + g[0] + ',' + g[1] + ')';
     nameEl.style.webkitBackgroundClip = 'text';
     nameEl.style.backgroundClip = 'text';
     nameEl.style.webkitTextFillColor = 'transparent';
     nameEl.style.color = 'transparent';
-    cursorEl.style.background = 'linear-gradient(180deg,'+g[0]+','+g[1]+')';
+    cursorEl.style.background = 'linear-gradient(180deg,' + g[0] + ',' + g[1] + ')';
   }
 
   function isJapanese(str) { return /[぀-ヿ一-鿿]/.test(str); }
@@ -312,7 +299,7 @@
     nameEl.textContent = ''; var i = 0;
     function step() {
       nameEl.textContent = str.slice(0, ++i);
-      if (i < str.length) setTimeout(step, 72 + Math.random()*44);
+      if (i < str.length) setTimeout(step, 72 + Math.random() * 44);
       else setTimeout(done, 2500);
     }
     step();
@@ -322,7 +309,7 @@
     var pool = glitchPool(str), s = 0, total = 7;
     function scramble() {
       nameEl.textContent = str.split('').map(function(c, i) {
-        return s / total > i / str.length ? '' : pool[Math.floor(Math.random()*pool.length)];
+        return s / total > i / str.length ? '' : pool[Math.floor(Math.random() * pool.length)];
       }).join('');
       s++;
       if (s <= total) setTimeout(scramble, 52);
@@ -332,7 +319,7 @@
   }
 
   function pickNext() {
-    var n; do { n = Math.floor(Math.random()*NAMES.length); } while (n === nameIdx); return n;
+    var n; do { n = Math.floor(Math.random() * NAMES.length); } while (n === nameIdx); return n;
   }
 
   function cycle() {
@@ -343,30 +330,54 @@
       });
     });
   }
-  cycle();
 
-  // ── Background canvas
+  // ── Data loading
+  function parseJsonl(text) {
+    return text.trim().split('\n')
+      .map(function(l) { return l.trim(); })
+      .filter(Boolean)
+      .map(JSON.parse);
+  }
+
+  Promise.all([
+    fetch('./profile.json').then(function(r) { return r.json(); }),
+    fetch('./links.jsonl').then(function(r) { return r.text(); }).then(parseJsonl)
+  ]).then(function(results) {
+    var profile = results[0], links = results[1];
+    NAMES = profile.names || [];
+    initInterests(profile.interests || []);
+    initLinks(links);
+    if (NAMES.length) {
+      nameIdx = Math.floor(Math.random() * NAMES.length);
+      cycle();
+    }
+  }).catch(function(err) {
+    console.error('[portal] data load failed:', err);
+  });
+
+  // ── Background canvas (starts immediately)
   var canvas = document.getElementById('bg');
   var ctx    = canvas.getContext('2d');
   var CONN   = 120;
 
   function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-  window.addEventListener('resize', resize); resize();
+  window.addEventListener('resize', resize);
+  resize();
 
-  var SHAPES = ['circle','hex','diamond'];
+  var SHAPES = ['circle', 'hex', 'diamond'];
 
   function makeNode(init) {
     return {
-      x:     init ? Math.random()*canvas.width  : (Math.random()<.5 ? -24 : canvas.width+24),
-      y:     init ? Math.random()*canvas.height : Math.random()*canvas.height,
-      vx:    (Math.random()-.5)*0.25,
-      vy:    (Math.random()-.5)*0.25,
-      r:     3 + Math.random()*5.5,
-      color: ACCENTS[Math.floor(Math.random()*ACCENTS.length)],
-      shape: SHAPES[Math.floor(Math.random()*SHAPES.length)],
-      alpha: 0.18 + Math.random()*0.30,
-      angle: Math.random()*Math.PI*2,
-      spin:  (Math.random()-.5)*0.007
+      x:     init ? Math.random() * canvas.width  : (Math.random() < .5 ? -24 : canvas.width + 24),
+      y:     init ? Math.random() * canvas.height : Math.random() * canvas.height,
+      vx:    (Math.random() - .5) * 0.25,
+      vy:    (Math.random() - .5) * 0.25,
+      r:     3 + Math.random() * 5.5,
+      color: ACCENTS[Math.floor(Math.random() * ACCENTS.length)],
+      shape: SHAPES[Math.floor(Math.random() * SHAPES.length)],
+      alpha: 0.18 + Math.random() * 0.30,
+      angle: Math.random() * Math.PI * 2,
+      spin:  (Math.random() - .5) * 0.007
     };
   }
 
@@ -382,15 +393,15 @@
     ctx.lineWidth   = 1; ctx.shadowBlur = 0;
     ctx.beginPath();
     if (n.shape === 'circle') {
-      ctx.arc(0, 0, n.r, 0, Math.PI*2);
+      ctx.arc(0, 0, n.r, 0, Math.PI * 2);
     } else if (n.shape === 'hex') {
       for (var k = 0; k < 6; k++) {
-        var a = (k/6)*Math.PI*2 - Math.PI/2;
-        ctx[k?'lineTo':'moveTo'](Math.cos(a)*n.r, Math.sin(a)*n.r);
+        var a = (k / 6) * Math.PI * 2 - Math.PI / 2;
+        ctx[k ? 'lineTo' : 'moveTo'](Math.cos(a) * n.r, Math.sin(a) * n.r);
       }
       ctx.closePath();
     } else {
-      ctx.moveTo(0,-n.r); ctx.lineTo(n.r,0); ctx.lineTo(0,n.r); ctx.lineTo(-n.r,0); ctx.closePath();
+      ctx.moveTo(0, -n.r); ctx.lineTo(n.r, 0); ctx.lineTo(0, n.r); ctx.lineTo(-n.r, 0); ctx.closePath();
     }
     ctx.fill(); ctx.stroke();
     ctx.restore();
@@ -398,14 +409,17 @@
 
   function drawLinks() {
     for (var i = 0; i < nodes.length; i++) {
-      for (var j = i+1; j < nodes.length; j++) {
-        var dx = nodes[i].x-nodes[j].x, dy = nodes[i].y-nodes[j].y;
-        var d  = Math.sqrt(dx*dx+dy*dy);
+      for (var j = i + 1; j < nodes.length; j++) {
+        var dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+        var d  = Math.sqrt(dx * dx + dy * dy);
         if (d < CONN) {
-          ctx.globalAlpha = (1-d/CONN)*0.18;
+          ctx.globalAlpha = (1 - d / CONN) * 0.18;
           ctx.strokeStyle = '#7090b8';
           ctx.lineWidth   = 0.5; ctx.shadowBlur = 0;
-          ctx.beginPath(); ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
         }
       }
     }
@@ -414,22 +428,22 @@
   function drawGrid() {
     ctx.globalAlpha = 0.08; ctx.strokeStyle = '#6890c0'; ctx.lineWidth = 0.5;
     var g = 72;
-    for (var x = 0; x <= canvas.width; x+=g) {
-      ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke();
+    for (var x = 0; x <= canvas.width; x += g) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
     }
-    for (var y = 0; y <= canvas.height; y+=g) {
-      ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke();
+    for (var y = 0; y <= canvas.height; y += g) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
     }
   }
 
   function frame() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawGrid();
     ctx.globalAlpha = 1;
     drawLinks();
     nodes.forEach(function(n) {
       n.x += n.vx; n.y += n.vy; n.angle += n.spin;
-      if (n.x<-60||n.x>canvas.width+60||n.y<-60||n.y>canvas.height+60) {
+      if (n.x < -60 || n.x > canvas.width + 60 || n.y < -60 || n.y > canvas.height + 60) {
         var f = makeNode(false); Object.assign(n, f);
       }
       drawNode(n);

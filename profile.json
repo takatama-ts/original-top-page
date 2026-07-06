@@ -1,0 +1,19 @@
+{
+  "names": [
+    "Tama",
+    "Erlei",
+    "たま",
+    "Kohki_Takatama",
+    "かめれおん",
+    "MaoWeiyu",
+    "雲雀"
+  ],
+  "interests": [
+    { "label": "からくりサーカス", "color": "#c8003e" },
+    { "label": "最終兵器彼女",     "color": "#6010c0" },
+    { "label": "3つの物語",        "color": "#0078af" },
+    { "label": "プログラミング",   "color": "#077a48" },
+    { "label": "読書",             "color": "#b07000" },
+    { "label": "自然",             "color": "#2e7a1a" }
+  ]
+}
